@@ -89,7 +89,6 @@ result_filtered = regressor_OLS_filtered.fit()
 lin_reg2.fit(X = filtered_data_x[:, :], y = y_train)
 y_poly_predict2 = lin_reg2.predict(x_test_poly_copy)
 
-# Performans değerlendirme (R2 ve MSE)
 mse_poly2 = mean_squared_error(y_test, y_poly_predict2)
 r2_poly2 = r2_score(y_test, y_poly_predict2)
 # print(f"After Feature Removal Poly Regression Model - MSE: {mse_poly2}, R²: {r2_poly2}")
@@ -117,10 +116,8 @@ p_values = ols_model.pvalues
 
 high_p_value_indices = p_values[p_values > 0.5].index 
 
-# "const" sütunu varsa onu çıkartmamız gerekecek, çünkü sabit terim her zaman modelde kalır
 high_p_value_indices = high_p_value_indices.drop('const', errors='ignore')
 
-# P-değeri 0.5'ten büyük olan sütunları (özellikleri) veri setinden çıkarma
 x_train_filtered = x_train.drop(columns=high_p_value_indices)
 x_test_filtered = x_test.drop(columns=high_p_value_indices)
 
